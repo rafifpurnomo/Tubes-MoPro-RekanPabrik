@@ -94,7 +94,32 @@ class WellcomePage extends StatelessWidget {
               height: 60,
               width: MediaQuery.of(context).size.width - 2 * 23,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration:
+                          Duration(milliseconds: 300), // Durasi animasi
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          login_page(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(0.0, 1.0); // Mulai dari bawah
+                        const end = Offset(0.0,
+                            0.0); // Berakhir di posisi normal (tengah layar)
+                        const curve = Curves.ease;
+
+                        var tween = Tween(begin: begin, end: end)
+                            .chain(CurveTween(curve: curve));
+
+                        return SlideTransition(
+                          position: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
                       Colors.transparent, // Latar belakang transparan
