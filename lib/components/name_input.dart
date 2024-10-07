@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:rekanpabrik/shared/shared.dart';
 
-class EmailInput extends StatelessWidget {
-  final TextEditingController emailController;
+class name_input extends StatelessWidget {
+  final TextEditingController nameInputController;
+  final String label;
   final bool isEror;
 
-  const EmailInput({
+  const name_input({
     super.key,
-    required this.emailController,
+    required this.nameInputController,
+    required this.label,
     required this.isEror,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: emailController, // Menghubungkan controller
+      controller: nameInputController, // Menghubungkan controller
       decoration: InputDecoration(
         prefixIcon: Icon(
-          Icons.email,
+          Icons.person,
           size: 20,
         ),
-        labelText: 'Email',
+        labelText: label,
         labelStyle: TextStyle(
           color: greyColor,
         ),

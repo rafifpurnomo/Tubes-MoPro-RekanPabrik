@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:rekanpabrik/shared/shared.dart';
 
-class PassInput extends StatefulWidget {
+class ConfirmPassInput extends StatefulWidget {
   final TextEditingController controller;
   final bool isEror;
 
-  const PassInput({
+  const ConfirmPassInput({
     super.key,
     required this.controller,
     required this.isEror,
   });
 
   @override
-  _PassInputState createState() => _PassInputState();
+  _confirmPassInput createState() => _confirmPassInput();
 }
 
-class _PassInputState extends State<PassInput> {
+class _confirmPassInput extends State<ConfirmPassInput> {
   bool _obscureText = true;
 
   @override
@@ -25,7 +25,7 @@ class _PassInputState extends State<PassInput> {
       obscureText: _obscureText, // Kontrol visibilitas password
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.lock, size: 20),
-        labelText: 'Password',
+        labelText: 'Confirm Password',
         labelStyle: TextStyle(color: greyColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),

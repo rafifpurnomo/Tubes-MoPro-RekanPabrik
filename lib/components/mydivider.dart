@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class mydivider extends StatelessWidget {
-  final Color color; // Parameter untuk warna
-  final double thickness; // Parameter untuk ketebalan
+  final Color color;
+  final double thickness;
 
   const mydivider({
     Key? key,
-    this.color = Colors.grey, // Default warna
-    this.thickness = 0.5, // Default ketebalan
+    this.color = Colors.grey,
+    this.thickness = 0.5,
   }) : super(key: key);
 
   @override

@@ -1,7 +1,48 @@
 part of 'page.dart';
 
-class register_pelamar extends StatelessWidget {
-  const register_pelamar({super.key});
+class register_pelamar extends StatefulWidget {
+  @override
+  _registerPelamarState createState() => _registerPelamarState();
+}
+
+class _registerPelamarState extends State<register_pelamar> {
+  // VARIABLE
+  final TextEditingController EmailController = TextEditingController();
+  String emailErrorMessage = '';
+  bool mailIsEror = false;
+
+  final TextEditingController passwordController = TextEditingController();
+  String passErrorMessage = '';
+  bool passIsEror = false;
+
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+  String confirmPassErrorMessage = '';
+  bool confirmPassIsEror = false;
+
+  final TextEditingController FNameController = TextEditingController();
+  String FNameErrorMessage = '';
+  bool FNameIsEror = false;
+
+  final TextEditingController LNameController = TextEditingController();
+  String LNameErrorMessage = '';
+  bool LNameIsEror = false;
+
+  String generalMassageEror = '';
+  bool generalEror = false;
+
+  // FUNGSI
+  bool isEmailValid(String email) {
+    return email.contains('@');
+  }
+
+  bool isPassValid(String pass) {
+    return pass.isNotEmpty;
+  }
+
+  bool checkConfirmPass(String pass, String confirmPass) {
+    return (pass == confirmPass);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +59,7 @@ class register_pelamar extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true, // Menyelaraskan teks di tengah
+        centerTitle: true,
       ),
       body: SafeArea(
         bottom: true,
@@ -28,11 +69,11 @@ class register_pelamar extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            // Teks untuk recruiter
+
             Align(
-              alignment: Alignment.centerLeft, // Menyelaraskan teks ke kiri
+              alignment: Alignment.centerLeft,
               child: Container(
-                width: 250, // Mengatur lebar teks
+                width: 250,
                 child: Text(
                   "If you are a recruiter, please create an account here",
                   style: TextStyle(
@@ -41,17 +82,17 @@ class register_pelamar extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
-                  softWrap: true, // Mengatur agar teks dapat turun ke bawah
+                  softWrap: true,
                 ),
               ),
             ),
 
             SizedBox(
-              height: 10, // Jarak antara teks dan tombol
+              height: 10,
             ),
-            // Tombol untuk recruiter
+
             Align(
-              alignment: Alignment.centerLeft, // Menyelaraskan tombol ke kiri
+              alignment: Alignment.centerLeft,
               child: ElevatedButton(
                 onPressed: () {
                   // Tambahkan aksi untuk pembuatan akun HRD
@@ -77,7 +118,7 @@ class register_pelamar extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 50, // Jarak antara tombol dan teks selanjutnya
+              height: 50,
             ),
             // Teks Welcome Applicants
             Text(
@@ -90,7 +131,7 @@ class register_pelamar extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            // Deskripsi di bawah Welcome
+
             Text(
               "Sign up to your account to continue",
               style: TextStyle(
@@ -103,159 +144,60 @@ class register_pelamar extends StatelessWidget {
             ),
 
             SizedBox(
-              height: 30, // Jarak antara deskripsi dan input
+              height: 30,
             ),
+            name_input(
+                nameInputController: FNameController,
+                label: "First Name",
+                isEror: FNameIsEror),
+            if (FNameErrorMessage.isNotEmpty)
+              Text(
+                FNameErrorMessage,
+                style: TextStyle(color: Colors.red),
+              ),
 
-            // Input Fields
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'First Name',
-                labelStyle: TextStyle(
-                  color: greyColor, // Warna label
-                ),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(15), // Mengatur border radius
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika tidak fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika tidak fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
+            SizedBox(height: 10),
+            name_input(
+                nameInputController: LNameController,
+                label: "Last Name",
+                isEror: LNameIsEror),
+            if (LNameErrorMessage.isNotEmpty)
+              Text(
+                LNameErrorMessage,
+                style: TextStyle(color: Colors.red),
               ),
-            ),
-            SizedBox(height: 10), // Jarak antar input
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Last Name',
-                labelStyle: TextStyle(
-                  color: greyColor, // Warna label
-                ),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(15), // Mengatur border radius
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika tidak fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika tidak fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
+
+            SizedBox(height: 10),
+            EmailInput(emailController: EmailController, isEror: mailIsEror),
+            if (emailErrorMessage.isNotEmpty)
+              Text(
+                emailErrorMessage,
+                style: TextStyle(color: Colors.red),
               ),
-            ),
-            SizedBox(height: 10), // Jarak antar input
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Email',
-                labelStyle: TextStyle(
-                  color: greyColor, // Warna label
-                ),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(15), // Mengatur border radius
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika tidak fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika tidak fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
+
+            SizedBox(height: 10),
+            PassInput(controller: passwordController, isEror: passIsEror),
+            if (passErrorMessage.isNotEmpty)
+              Text(
+                passErrorMessage,
+                style: TextStyle(color: Colors.red),
               ),
-            ),
-            SizedBox(height: 10), // Jarak antar input
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Password',
-                labelStyle: TextStyle(
-                  color: greyColor, // Warna label
-                ),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(15), // Mengatur border radius
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika tidak fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika tidak fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
+
+            SizedBox(height: 10),
+            ConfirmPassInput(
+                controller: confirmPasswordController,
+                isEror: confirmPassIsEror),
+            if (confirmPassErrorMessage.isNotEmpty)
+              Text(
+                confirmPassErrorMessage,
+                style: TextStyle(color: Colors.red),
               ),
-            ),
-            SizedBox(height: 10), // Jarak antar input
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Confirm Password',
-                labelStyle: TextStyle(
-                  color: greyColor, // Warna label
-                ),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(15), // Mengatur border radius
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika tidak fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika tidak fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15), // Mengatur border radius ketika fokus
-                  borderSide: BorderSide(
-                    color: thirdColor, // Warna border ketika fokus
-                    width: 2.0, // Ketebalan border
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 30), // Jarak sebelum teks login
+
+            SizedBox(height: 30),
             Align(
-              alignment: Alignment.center, // Menyelaraskan teks ke kiri
+              alignment: Alignment.center,
               child: Container(
-                width: 300, // Mengatur lebar teks
+                width: 300,
                 child: Text(
                   "by proceeding you confirm that you have read and agree to calendly terms of use and privacy notice",
                   style: TextStyle(
@@ -265,16 +207,59 @@ class register_pelamar extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
-                  softWrap: true, // Mengatur agar teks dapat turun ke bawah
+                  softWrap: true,
                 ),
               ),
             ),
             SizedBox(height: 10),
             Align(
-              alignment: Alignment.center, // Menyelaraskan tombol ke kiri
+              alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
-                  // Tambahkan aksi untuk pembuatan akun HRD
+                  setState(() {
+                    String Fname = FNameController.text;
+                    String Lname = LNameController.text;
+                    String email = EmailController.text;
+                    String pass = passwordController.text;
+                    String confirmPass = confirmPasswordController.text;
+
+                    // Reset semua error messages
+                    FNameErrorMessage = '';
+                    LNameErrorMessage = '';
+                    emailErrorMessage = '';
+                    passErrorMessage = '';
+                    confirmPassErrorMessage = '';
+
+                    // Reset status error
+                    FNameIsEror = false;
+                    LNameIsEror = false;
+                    mailIsEror = false;
+                    passIsEror = false;
+                    confirmPassIsEror = false;
+
+                    // Cek jika ada field yang kosong dan set error message yang sesuai
+                    if (Fname.isEmpty) {
+                      FNameErrorMessage = "Nama depan tidak boleh kosong";
+                      FNameIsEror = true;
+                    }
+                    if (Lname.isEmpty) {
+                      LNameErrorMessage = "Nama belakang tidak boleh kosong";
+                      LNameIsEror = true;
+                    }
+                    if (email.isEmpty) {
+                      emailErrorMessage = "Email tidak boleh kosong";
+                      mailIsEror = true;
+                    }
+                    if (pass.isEmpty) {
+                      passErrorMessage = "Password tidak boleh kosong";
+                      passIsEror = true;
+                    }
+                    if (confirmPass.isEmpty) {
+                      confirmPassErrorMessage =
+                          "Konfirmasi password tidak boleh kosong";
+                      confirmPassIsEror = true;
+                    }
+                  });
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: thirdColor, // Warna tombol
@@ -296,9 +281,9 @@ class register_pelamar extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20), // Jarak antara tombol dan teks login
+            SizedBox(height: 20),
             RichText(
-              textAlign: TextAlign.center, // Menyelaraskan teks di tengah
+              textAlign: TextAlign.center,
               text: TextSpan(
                 style: TextStyle(
                   color: greyColor,
@@ -311,19 +296,16 @@ class register_pelamar extends StatelessWidget {
                   TextSpan(
                     text: "login",
                     style: TextStyle(
-                      color: Colors.blue, // Warna biru untuk teks "log in"
-                      fontWeight: FontWeight.bold, // Mengatur ketebalan font
-                      decoration:
-                          TextDecoration.underline, // Menambahkan garis bawah
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        // Navigasi ke halaman login
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  WellcomePage()), // Ganti LoginPage dengan nama kelas halaman login Anda
+                              builder: (context) => WellcomePage()),
                         );
                       },
                   ),

@@ -1,7 +1,29 @@
 part of 'page.dart';
 
-class login_page extends StatelessWidget {
-  const login_page({super.key});
+class login_page extends StatefulWidget {
+  @override
+  _loginPageState createState() => _loginPageState();
+}
+
+class _loginPageState extends State<login_page> {
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController EmailController = TextEditingController();
+  String emailErrorMessage = '';
+  String passErrorMessage = '';
+  bool mailIsEror = false;
+  bool passIsEror = false;
+
+  bool isEmailValid(String email) {
+    return email.contains('@');
+  }
+
+  bool isPassValid(String pass) {
+    return pass.isNotEmpty;
+  }
+
+  bool cekEmailnPass(String email, String pass) {
+    return (email.isNotEmpty && pass.isNotEmpty);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +40,7 @@ class login_page extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true, // Menyelaraskan teks di tengah
+        centerTitle: true,
       ),
       body: SafeArea(
         bottom: true,
@@ -29,9 +51,9 @@ class login_page extends StatelessWidget {
               height: 50,
             ),
             Align(
-              alignment: Alignment.centerLeft, // Menyelaraskan teks ke kiri
+              alignment: Alignment.centerLeft,
               child: Container(
-                width: 250, // Mengatur lebar teks
+                width: 250,
                 child: Text(
                   "Login",
                   style: TextStyle(
@@ -40,14 +62,14 @@ class login_page extends StatelessWidget {
                     fontSize: 40,
                     fontWeight: FontWeight.w500,
                   ),
-                  softWrap: true, // Mengatur agar teks dapat turun ke bawah
+                  softWrap: true,
                 ),
               ),
             ),
             Align(
-              alignment: Alignment.centerLeft, // Menyelaraskan teks ke kiri
+              alignment: Alignment.centerLeft,
               child: Container(
-                width: 250, // Mengatur lebar teks
+                width: 250,
                 child: Text(
                   "Wellcome Back",
                   style: TextStyle(
@@ -56,20 +78,36 @@ class login_page extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.w400,
                   ),
-                  softWrap: true, // Mengatur agar teks dapat turun ke bawah
+                  softWrap: true,
                 ),
               ),
             ),
             SizedBox(
-              height: 50, // Jarak antara tombol dan teks selanjutnya
+              height: 50,
             ),
-            EmailInput(),
-            SizedBox(
-              height: 20, // Jarak antara tombol dan teks selanjutnya
+            EmailInput(
+              emailController: EmailController,
+              isEror: mailIsEror,
             ),
-            PassInput(),
+            if (emailErrorMessage.isNotEmpty)
+              Text(
+                emailErrorMessage,
+                style: TextStyle(color: Colors.red),
+              ),
             SizedBox(
-              height: 10, // Jarak antara tombol dan teks selanjutnya
+              height: 20,
+            ),
+            PassInput(
+              controller: passwordController,
+              isEror: passIsEror,
+            ),
+            if (passErrorMessage.isNotEmpty)
+              Text(
+                passErrorMessage,
+                style: TextStyle(color: Colors.red),
+              ),
+            SizedBox(
+              height: 10,
             ),
             Align(
               alignment: Alignment.topRight,
@@ -77,10 +115,8 @@ class login_page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            WellcomePage()), // Ganti LoginPage dengan nama kelas halaman login Anda
-                  ); // Ganti dengan nama route yang sesuai
+                    MaterialPageRoute(builder: (context) => WellcomePage()),
+                  );
                 },
                 child: Text(
                   'Forgot Password?',
@@ -94,13 +130,40 @@ class login_page extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Align(
-              alignment: Alignment.center, // Menyelaraskan tombol ke kiri
+              alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
-                  // Tambahkan aksi untuk pembuatan akun HRD
+                  setState(() {
+                    String email = EmailController.text;
+                    String pass = passwordController.text;
+
+                    emailErrorMessage = '';
+                    passErrorMessage = '';
+
+                    mailIsEror = false;
+                    passIsEror = false;
+
+                    if (cekEmailnPass(email, pass)) {
+                      emailErrorMessage = 'Email tidak boleh kosong';
+                      mailIsEror = true;
+
+                      passErrorMessage = 'Password tidak boleh kosong';
+                      passIsEror = true;
+                    }
+
+                    if (!isEmailValid(email)) {
+                      emailErrorMessage = 'Email harus mengandung "@"';
+                      mailIsEror = true;
+                    }
+
+                    if (pass.isEmpty) {
+                      passErrorMessage = 'Password tidak boleh kosong';
+                      passIsEror = true;
+                    }
+                  });
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: thirdColor, // Warna tombol
+                  backgroundColor: thirdColor,
                   padding: EdgeInsets.symmetric(
                     vertical: 10,
                     horizontal: 50,
@@ -150,9 +213,9 @@ class login_page extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 100), // Jarak antara tombol dan teks login
+            SizedBox(height: 100),
             RichText(
-              textAlign: TextAlign.center, // Menyelaraskan teks di tengah
+              textAlign: TextAlign.center,
               text: TextSpan(
                 style: TextStyle(
                   color: greyColor,
@@ -165,19 +228,16 @@ class login_page extends StatelessWidget {
                   TextSpan(
                     text: "Sign up now",
                     style: TextStyle(
-                      color: Colors.blue, // Warna biru untuk teks "log in"
-                      fontWeight: FontWeight.bold, // Mengatur ketebalan font
-                      decoration:
-                          TextDecoration.underline, // Menambahkan garis bawah
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        // Navigasi ke halaman login
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  register_pelamar()), // Ganti LoginPage dengan nama kelas halaman login Anda
+                              builder: (context) => register_pelamar()),
                         );
                       },
                   ),

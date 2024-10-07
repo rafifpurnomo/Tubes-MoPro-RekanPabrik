@@ -14,10 +14,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          canvasColor: Colors.transparent,
-          primaryColor: primaryColor,
-          primarySwatch: Colors.cyan),
-      home: WellcomePage(),
+          canvasColor: Colors.transparent, primaryColor: primaryColor),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => WellcomePage(),
+        '/login': (context) => login_page(),
+        '/registerPelamar': (context) => register_pelamar(),
+        // '/' :(context)=>WellcomePage(),
+      },
     );
   }
 }
