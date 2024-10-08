@@ -25,6 +25,41 @@ class _loginPageState extends State<login_page> {
     return (email.isNotEmpty && pass.isNotEmpty);
   }
 
+  void LoginUser(String email, String pass) {
+    bool akunKetemu = false;
+
+    for (var akun in dummyAccounts) {
+      if (akun['email'] == email && akun['password'] == pass) {
+        akunKetemu = true;
+        if (akun['role'] == 'admin') {
+          Navigator.pushNamed(context, '/');
+        } else if (akun['role'] == 'HRD') {
+          Navigator.pushNamed(context, '/');
+        } else if (akun['role'] == 'pelamar') {
+          Navigator.pushNamed(context, '/pagePelamar');
+        }
+        break;
+      }
+    }
+
+    if (!akunKetemu) {
+      setState(() {
+        emailErrorMessage = 'Invalid email or password';
+        passErrorMessage = 'Invalid email or password';
+        passIsEror = true;
+        mailIsEror = true;
+      });
+    }
+  }
+
+  void testing() {
+    try {
+      Navigator.pushNamed(context, '/pagePelamar');
+    } catch (e) {
+      debugPrint("gagal");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,6 +168,7 @@ class _loginPageState extends State<login_page> {
               alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
+                  //testing();
                   setState(() {
                     String email = EmailController.text;
                     String pass = passwordController.text;
@@ -143,7 +179,7 @@ class _loginPageState extends State<login_page> {
                     mailIsEror = false;
                     passIsEror = false;
 
-                    if (cekEmailnPass(email, pass)) {
+                    if (!cekEmailnPass(email, pass)) {
                       emailErrorMessage = 'Email tidak boleh kosong';
                       mailIsEror = true;
 
@@ -160,6 +196,7 @@ class _loginPageState extends State<login_page> {
                       passErrorMessage = 'Password tidak boleh kosong';
                       passIsEror = true;
                     }
+                    LoginUser(email, pass);
                   });
                 },
                 style: ElevatedButton.styleFrom(

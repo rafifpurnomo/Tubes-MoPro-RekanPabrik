@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rekanpabrik/components/navbarComponent.dart';
 import 'package:rekanpabrik/pages/page.dart';
 import 'package:rekanpabrik/shared/shared.dart';
 
@@ -14,13 +15,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          canvasColor: Colors.transparent, primaryColor: primaryColor),
+          canvasColor: thirdColor,
+          primaryColor: primaryColor,
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor:
+                Colors.transparent, // Atur coklat sesuai kebutuhanmu
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.white,
+          )),
       initialRoute: '/',
       routes: {
-        '/': (context) => WellcomePage(),
+        '/': (context) => const WellcomePage(),
         '/login': (context) => login_page(),
         '/registerPelamar': (context) => register_pelamar(),
-        // '/' :(context)=>WellcomePage(),
+        '/pagePelamar': (context) => navbarComponent(),
       },
     );
   }
