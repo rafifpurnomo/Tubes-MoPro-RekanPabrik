@@ -26,6 +26,7 @@ class _navbarComponentState extends State<navbarComponent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           _buildPage(_selectedIndex), // Ini adalah halaman utama
