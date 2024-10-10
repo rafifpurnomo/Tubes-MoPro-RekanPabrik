@@ -4,10 +4,10 @@ class Caripekerjaan extends StatefulWidget {
   const Caripekerjaan({super.key});
 
   @override
-  State<Caripekerjaan> createState() => _Caripekerjaan();
+  State<Caripekerjaan> createState() => _CaripekerjaanState();
 }
 
-class _Caripekerjaan extends State<Caripekerjaan> {
+class _CaripekerjaanState extends State<Caripekerjaan> {
   final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class _Caripekerjaan extends State<Caripekerjaan> {
               SizedBox(
                 height: 30,
               ),
-              SearchBarComponent(),
+              searchBarCariPekerjaan(),
               SizedBox(
                 height: 30,
               ),

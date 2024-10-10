@@ -168,36 +168,36 @@ class _loginPageState extends State<login_page> {
               alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
-                  //testing();
-                  setState(() {
-                    String email = EmailController.text;
-                    String pass = passwordController.text;
+                  testing();
+                  // setState(() {
+                  //   String email = EmailController.text;
+                  //   String pass = passwordController.text;
 
-                    emailErrorMessage = '';
-                    passErrorMessage = '';
+                  //   emailErrorMessage = '';
+                  //   passErrorMessage = '';
 
-                    mailIsEror = false;
-                    passIsEror = false;
+                  //   mailIsEror = false;
+                  //   passIsEror = false;
 
-                    if (!cekEmailnPass(email, pass)) {
-                      emailErrorMessage = 'Email tidak boleh kosong';
-                      mailIsEror = true;
+                  //   if (!cekEmailnPass(email, pass)) {
+                  //     emailErrorMessage = 'Email tidak boleh kosong';
+                  //     mailIsEror = true;
 
-                      passErrorMessage = 'Password tidak boleh kosong';
-                      passIsEror = true;
-                    }
+                  //     passErrorMessage = 'Password tidak boleh kosong';
+                  //     passIsEror = true;
+                  //   }
 
-                    if (!isEmailValid(email)) {
-                      emailErrorMessage = 'Email harus mengandung "@"';
-                      mailIsEror = true;
-                    }
+                  //   if (!isEmailValid(email)) {
+                  //     emailErrorMessage = 'Email harus mengandung "@"';
+                  //     mailIsEror = true;
+                  //   }
 
-                    if (pass.isEmpty) {
-                      passErrorMessage = 'Password tidak boleh kosong';
-                      passIsEror = true;
-                    }
-                    LoginUser(email, pass);
-                  });
+                  //   if (pass.isEmpty) {
+                  //     passErrorMessage = 'Password tidak boleh kosong';
+                  //     passIsEror = true;
+                  //   }
+                  //   LoginUser(email, pass);
+                  // });
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: thirdColor,

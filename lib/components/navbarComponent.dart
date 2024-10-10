@@ -35,7 +35,7 @@ class _navbarComponentState extends State<navbarComponent> {
             right: 20.0,
             bottom: 20.0,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(100),
               child: Container(
                 height: 90,
                 decoration: BoxDecoration(

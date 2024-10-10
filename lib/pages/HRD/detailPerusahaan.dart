@@ -21,7 +21,7 @@ class detailPerusahaan extends StatelessWidget {
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
-        title: Text(''),
+        backgroundColor: primaryColor,
       ),
       body: company != null
           ? Container(

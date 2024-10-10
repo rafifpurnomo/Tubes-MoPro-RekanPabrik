@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'poppins',
           canvasColor: thirdColor,
           primaryColor: primaryColor,
+          appBarTheme: AppBarTheme(backgroundColor: primaryColor),
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor:
                 Colors.transparent, // Atur coklat sesuai kebutuhanmu
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => login_page(),
         '/registerPelamar': (context) => register_pelamar(),
         '/pagePelamar': (context) => navbarComponent(),
+        '/cariPabrik': (context) => CariPabrik(),
       },
     );
   }

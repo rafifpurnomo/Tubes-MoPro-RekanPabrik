@@ -115,7 +115,7 @@ class _homePelamar extends State<home_pelamar> {
               alignment: Alignment.centerLeft,
               child: ElevatedButton(
                 onPressed: () {
-                  // Tambahkan aksi untuk pembuatan akun HRD
+                  Navigator.pushNamed(context, '/cariPabrik');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
